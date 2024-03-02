@@ -1,0 +1,43 @@
+#define lm35 A0
+void ledBlink_250();
+void ledBlink_500();
+
+void setup() 
+{
+  // put your setup code here, to run once:
+  pinMode(LED_BUILTIN,OUTPUT);
+  pinMode(LED_BUILTIN,INPUT);
+}
+
+void loop() 
+{
+  // put your main code here, to run repeatedly:
+   int sensorValue = analogRead(lm35);
+   float voltage = sensorValue * (5.0f/1024.0f);
+   float temperature = voltage * 100;
+
+    if(temperature < 30)
+    {
+      ledBlink_250();
+    }
+    else
+    {
+      ledBlink_500();
+    }
+}
+
+void ledBlink_250()
+{
+  digitalWrite(LED_BUILTIN,HIGH);
+  delay(250);
+  digitalWrite(LED_BUILTIN,LOW);
+  delay(250);
+}
+
+void ledBlink_500()
+{
+  digitalWrite(LED_BUILTIN,HIGH);
+  delay(500);
+  digitalWrite(LED_BUILTIN,LOW);
+  delay(500);
+}
